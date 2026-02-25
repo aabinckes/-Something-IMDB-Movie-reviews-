@@ -24,3 +24,8 @@ class SplitConfig:
     clean: bool = True
     config_name: Optional[str] = None
 
+def load_imbd(cache_dir: Optional[str] = None, config_name: Optional[str] = None) -> DatasetDict:
+    if config_name is None:
+        return load_dataset(DATASET_NAME, cache_dir=cache_dir)
+    return load_dataset(DATASET_NAME, config_name, cache_dir=cache_dir)
+
