@@ -86,3 +86,17 @@ def get_splits(cache_dir: Optional[str] = None, cfg: SplitConfig = SplitConfig()
         out["unsupervised"] = unsup
     
     return out
+
+def print_stats(ds: DatasetDict) -> None:
+    for split_name, split in ds.items():
+        n = len(split)
+        cols = split.column_names
+        if "label" in cols:
+            labels = split["label"]
+            #counts for 0/1 
+            counts = {k: 0 for k in set(labels)}
+            for y in labels:
+                counts[y] += 1
+            print(f"{split_name}: n={n:,} cols={cols} label_counts={dict(sorted(counts.items()))}")
+        else:
+            print(f"{split_name}: n={n:,} cols={cols}")
