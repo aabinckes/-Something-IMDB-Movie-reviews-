@@ -24,7 +24,7 @@ class SplitConfig:
     clean: bool = True
     config_name: Optional[str] = None
 
-def load_imbd(cache_dir: Optional[str] = None, config_name: Optional[str] = None) -> DatasetDict:
+def load_imdb(cache_dir: Optional[str] = None, config_name: Optional[str] = None) -> DatasetDict:
     if config_name is None:
         return load_dataset(DATASET_NAME, cache_dir=cache_dir)
     return load_dataset(DATASET_NAME, config_name, cache_dir=cache_dir)
@@ -35,7 +35,7 @@ def get_splits(cache_dir: Optional[str] = None, cfg: SplitConfig = SplitConfig()
     -train/val are created by splitting the official train split
     -split indices are saved/loaded from cfg.splits_dir so it is reproducible
     """
-    ds = load_imbd(cache_dir=cache_dir, config_name=cfg.config_name)
+    ds = load_imdb(cache_dir=cache_dir, config_name=cfg.config_name)
 
     train_full = ds["train"]
     test = ds["test"]
@@ -100,3 +100,28 @@ def print_stats(ds: DatasetDict) -> None:
             print(f"{split_name}: n={n:,} cols={cols} label_counts={dict(sorted(counts.items()))}")
         else:
             print(f"{split_name}: n={n:,} cols={cols}")
+
+def main() -> None:
+    p = argparse.ArgumentParser()
+    p.add_argument("--cache_dir", type=str, default=None)
+    p.add_argument("--val_size", type=float, default=0.2)
+    p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--splits_dir", type=str, default="splits")
+    p.add_argument("--no_clean", action="store_true")
+    p.add_argument("--config_name", type=str, default=None, help="Optional HF config (ex: plain_text)")
+    args = p.parse_args()
+
+    cfg = SplitConfig(
+        val_size=args.val_size,
+        seed=args.seed,
+        splits_dir=args.splits_dir,
+        clean=(not args.no_clean),
+        config_name=args.config_name,
+    )
+
+    ds = get_splits(cache_dir=args.cache_dir, cfg=cfg)
+    print_stats(ds)
+    print(f"Split indices saved/used from: {Path(cfg.splits_dir) / f'imdb_train_val_seed{cfg.seed}_val{cfg.val_size}.json'}")
+
+if __name__ == "__main__":
+    main()
