@@ -13,3 +13,14 @@ from sklearn.model_selection import train_test_split
 
 DATASET_NAME = "stanfordnlp/imdb"
 
+def clean_text(s: str) -> str:
+    return s.replace("<br />", " ").strip()
+
+@dataclass(frozen=True)
+class SplitConfig:
+    val_size: float = 0.2
+    seed: int = 42
+    splits_dir: str = "splits"
+    clean: bool = True
+    config_name: Optional[str] = None
+
