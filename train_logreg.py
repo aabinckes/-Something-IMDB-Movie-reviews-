@@ -32,6 +32,7 @@ def main() -> None:
     p.add_argument("--cache_dir", type=str, default=None)
     p.add_argument("--val_size", type=float, default=0.2)
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--splits_dir", type=str, default="splits")
     p.add_argument("--config_name", type=str, default=None)
     p.add_argument("--no_clean", action="store_true")
 
@@ -44,7 +45,7 @@ def main() -> None:
 
     #logistic Regression
     p.add_argument("--C", type=float, default=1.0)
-    p.add_argument("--class_weight", type=str, default=None, choices=[None, "balanced"])
+    p.add_argument("--class_weight", type=str, default="none", choices=["none", "balanced"])
     p.add_argument("--max_iter", type=int, default=2000)
 
     #output
@@ -86,7 +87,7 @@ def main() -> None:
         C=args.C,
         solver="liblinear",
         max_iter=args.max_iter,
-        class_weight=args.class_weight,
+        class_weight= None if args.class_weight == "none" else "balanced",
         random_state=args.seed,
     )
     model.fit(X_train, y_train)
@@ -109,7 +110,7 @@ def main() -> None:
         },
         "tfidf": {
             "max_features": args.max_features,
-            "ngram_range": [args.ngram_min, args.ngram_max]
+            "ngram_range": [args.ngram_min, args.ngram_max],
             "min_df": args.min_df,
             "max_df": args.max_df,
         },
