@@ -1,0 +1,17 @@
+# Core
+numpy
+pandas
+scipy
+tqdm
+matplotlib
+
+# ML + metrics
+scikit-learn
+
+# Hugging Face dataset loader
+datasets
+
+# PyTorch (MLP)
+torch
+
+seaborn

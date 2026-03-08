@@ -1,0 +1,26 @@
+{
+  "params": {
+    "val_size": 0.2,
+    "seed": 42,
+    "max_features": 5000,
+    "k": 3,
+    "metric": "cosine",
+    "out_dir": "results/knn_baseline"
+  },
+  "metrics": {
+    "accuracy": 0.716,
+    "precision": 0.6972242512783053,
+    "recall": 0.7636,
+    "f1": 0.7289041618938527,
+    "confusion_matrix": [
+      [
+        1671,
+        829
+      ],
+      [
+        591,
+        1909
+      ]
+    ]
+  }
+}

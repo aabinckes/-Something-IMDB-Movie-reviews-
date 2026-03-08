@@ -1,0 +1,39 @@
+{
+  "dataset": "stanfordnlp/imdb",
+  "split": {
+    "val_size": 0.2,
+    "seed": 42,
+    "splits_dir": "splits"
+  },
+  "tfidf": {
+    "max_features": 50000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_df": 0.95
+  },
+  "logreg": {
+    "C": 1.0,
+    "solver": "liblinear",
+    "class_weight": "none",
+    "max_iter": 2000
+  },
+  "val_metrics": {
+    "accuracy": 0.8976,
+    "precision": 0.8919558359621451,
+    "recall": 0.9048,
+    "f1": 0.8983320095313742,
+    "confusion_matrix": [
+      [
+        2226,
+        274
+      ],
+      [
+        238,
+        2262
+      ]
+    ]
+  }
+}
