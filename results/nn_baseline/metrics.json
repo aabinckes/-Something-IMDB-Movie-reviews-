@@ -6,23 +6,23 @@
     "hidden_layers": [
       100
     ],
-    "max_iter": 50,
+    "max_iter": 20,
     "alpha": 0.0001,
     "out_dir": "results/nn_baseline"
   },
   "metrics": {
-    "accuracy": 0.8646,
-    "precision": 0.8630027877339705,
-    "recall": 0.8668,
-    "f1": 0.8648972261025744,
+    "accuracy": 0.8714,
+    "precision": 0.8668510470169893,
+    "recall": 0.8776,
+    "f1": 0.872192407076128,
     "confusion_matrix": [
       [
-        2156,
-        344
+        2163,
+        337
       ],
       [
-        333,
-        2167
+        306,
+        2194
       ]
     ]
   }
