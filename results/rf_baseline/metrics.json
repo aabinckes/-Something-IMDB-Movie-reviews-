@@ -1,0 +1,26 @@
+{
+  "params": {
+    "val_size": 0.2,
+    "seed": 42,
+    "max_features": 10000,
+    "n_estimators": 100,
+    "max_depth": 50,
+    "out_dir": "results/rf_baseline"
+  },
+  "metrics": {
+    "accuracy": 0.8414,
+    "precision": 0.8440145102781137,
+    "recall": 0.8376,
+    "f1": 0.8407950210801044,
+    "confusion_matrix": [
+      [
+        2113,
+        387
+      ],
+      [
+        406,
+        2094
+      ]
+    ]
+  }
+}
